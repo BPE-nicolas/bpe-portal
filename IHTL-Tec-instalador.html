@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Técnico en Instalación y Mantenimiento — IH Tech Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0d0f;
+    --bg2: #0f1318;
+    --bg3: #141a22;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00e5b4;
+    --accent2: #00b8ff;
+    --text: #e8edf2;
+    --muted: #7a8a99;
+    --card: #111820;
+    --tag-bg: rgba(0,229,180,0.08);
+    --tag-text: #00e5b4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,229,180,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    padding: 28px 0 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border2);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .hero {
+    padding: 72px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .meta-pill svg { opacity: 0.5; flex-shrink: 0; }
+
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 28px);
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+
+  .section p {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  .alert-card {
+    background: rgba(0,229,180,0.04);
+    border: 1px solid rgba(0,229,180,0.15);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover { border-color: var(--border2); }
+
+  .card-icon { width: 36px; height: 36px; margin-bottom: 16px; opacity: 0.9; }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: none; margin: 0; }
+
+  .item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .item-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 15px;
+    color: var(--text);
+    padding: 16px 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .item-list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+  .tag {
+    padding: 8px 16px;
+    background: var(--tag-bg);
+    border: 1px solid rgba(0,229,180,0.15);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--tag-text);
+  }
+
+  .conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .cond-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+
+  .cond-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .cond-value { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.5; }
+  .cond-value strong { font-weight: 600; color: var(--accent); }
+
+  .cta-section {
+    padding: 80px 0 100px;
+    text-align: center;
+    position: relative;
+  }
+
+  .cta-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(0,229,180,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--accent);
+    color: #04221a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0,229,180,0.3);
+  }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero, .section { animation: fadeUp 0.6s ease both; }
+  .section:nth-child(2) { animation-delay: 0.05s; }
+  .section:nth-child(3) { animation-delay: 0.1s; }
+  .section:nth-child(4) { animation-delay: 0.15s; }
+  .section:nth-child(5) { animation-delay: 0.2s; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 0 40px; }
+    .section { padding: 48px 0; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .conditions-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <nav class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-dot"></div>
+        BPE
+      </a>
+      <div class="nav-badge">Posición Abierta</div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Posición abierta</div>
+    <h1>Técnico en Instalación y Mantenimiento de <span>Equipos de Seguridad</span></h1>
+    <p class="hero-subtitle">
+      Un rol técnico dinámico en el centro de innovación que está redefiniendo la seguridad con IA, IoT y sistemas autónomos.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-pill">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Full-time · Lunes a viernes
+      </div>
+      <div class="meta-pill">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        San Cristóbal + visitas a clientes
+      </div>
+      <div class="meta-pill">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        $2.000.000 ARS de referencia
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Sobre la empresa</div>
+    <h2>El laboratorio que construye el futuro de la seguridad</h2>
+    <p>IH Tech Labs es el centro de innovación del Grupo Securion. Combinamos la agilidad de una startup con el respaldo de una compañía global de más de 12.000 empleados.</p>
+    <p>Nos enfocamos en diseñar soluciones con Inteligencia Artificial, IoT y sistemas autónomos. Este no es un entorno donde todo está definido: estamos construyendo, iterando y creciendo constantemente.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-label">El rol</div>
+    <h2>Dinámico, autónomo y con impacto directo</h2>
+    <p>Vas a tener un rol que combina relevamientos técnicos, instalaciones y mantenimiento en campo, con contacto directo con clientes.</p>
+    <p>Las primeras semanas trabajarás acompañado del equipo para aprender las tecnologías y la forma de trabajo. Luego, se espera que puedas tomar instalaciones de forma autónoma.</p>
+
+    <div class="cards-grid" style="margin-top: 32px;">
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="rgba(0,229,180,0.08)"/><path d="M18 10v2M18 24v2M10 18h2M24 18h2M12.93 12.93l1.41 1.41M21.66 21.66l1.41 1.41M12.93 23.07l1.41-1.41M21.66 14.34l1.41-1.41" stroke="#00e5b4" stroke-width="1.5" stroke-linecap="round"/><circle cx="18" cy="18" r="4" stroke="#00e5b4" stroke-width="1.5"/></svg>
+        <h3>Instalaciones</h3>
+        <p>Cámaras, tótems, drones y sistemas de seguridad integrados. Trabajo en campo real desde el primer mes.</p>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="rgba(0,229,180,0.08)"/><path d="M11 13h14M11 18h14M11 23h9" stroke="#00e5b4" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="23" r="3" stroke="#00e5b4" stroke-width="1.5"/></svg>
+        <h3>Relevamientos</h3>
+        <p>Participás en la etapa pre-venta evaluando sitios y colaborando con presupuestos técnicos.</p>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="rgba(0,229,180,0.08)"/><path d="M18 11c-3.87 0-7 3.13-7 7s3.13 7 7 7 7-3.13 7-7" stroke="#00e5b4" stroke-width="1.5" stroke-linecap="round"/><path d="M22 11l3 3-3 3" stroke="#00e5b4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Clientes</h3>
+        <p>Contacto directo con clientes en cada visita. Generás confianza y detectás oportunidades.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Responsabilidades</div>
+    <h2>Lo que vas a hacer</h2>
+    <ul class="item-list">
+      <li>Realizar instalaciones de sistemas de seguridad: cámaras, tótems, drones y más</li>
+      <li>Ejecutar trabajos de cableado estructurado e instalaciones eléctricas básicas</li>
+      <li>Participar en relevamientos técnicos para presupuestos</li>
+      <li>Fidelizar clientes en cada interacción mediante una relación de confianza</li>
+      <li>Detectar oportunidades de mejora o necesidades adicionales en campo</li>
+      <li>Seguimiento administrativo de los proyectos asignados a su cartera de clientes</li>
+      <li>Coordinar tareas con técnicos y proveedores externos</li>
+      <li>Validar disponibilidad de materiales y equipos y/o solicitar sus compras</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Perfil buscado</div>
+    <h2>¿Sos vos?</h2>
+    <div class="tags-wrap">
+      <div class="tag">Técnico o estudiante de electrónica</div>
+      <div class="tag">Eléctrica / Electromecánica / afines</div>
+      <div class="tag">+1 año de experiencia técnica</div>
+      <div class="tag">Registro de conducir (deseable)</div>
+      <div class="tag">Proactividad y responsabilidad</div>
+      <div class="tag">Buen trato interpersonal</div>
+      <div class="tag">Curiosidad tecnológica</div>
+      <div class="tag">Inglés nivel B1</div>
+    </div>
+    <div style="margin-top: 32px;">
+      <div class="section-label">Lo que valoramos</div>
+      <ul class="item-list">
+        <li>Experiencia previa en instalación de sistemas de seguridad</li>
+        <li>Conocimientos en Redes / CCTV (infraestructura y configuración)</li>
+        <li>Experiencia coordinando proveedores o equipos</li>
+        <li>Curiosidad por nuevas tecnologías: IA, IoT, automatización</li>
+        <li>Que seas team player, dinámico, con empuje, responsabilidad y compromiso</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Las condiciones</div>
+    <h2>Lo que ofrecemos</h2>
+    <div class="conditions-grid">
+      <div class="cond-card"><div class="cond-label">Formato</div><div class="cond-value">Full-time, con flexibilidad de horarios</div></div>
+      <div class="cond-card"><div class="cond-label">Modalidad</div><div class="cond-value">Presencial en San Cristóbal, CABA (con viajes ocasionales al interior)</div></div>
+      <div class="cond-card"><div class="cond-label">Contratación</div><div class="cond-value">Contractor en Argentina · Facturación en pesos</div></div>
+      <div class="cond-card"><div class="cond-label">Honorarios de referencia</div><div class="cond-value"><strong>$2.000.000 ARS</strong> · A definir según perfil</div></div>
+      <div class="cond-card"><div class="cond-label">Crecimiento</div><div class="cond-value">Potencial a rol de <strong>supervisión técnica</strong> en el mediano plazo</div></div>
+      <div class="cond-card"><div class="cond-label">Incentivos</div><div class="cond-value">Posibilidad de comisionar por venta de dispositivos adicionales</div></div>
+    </div>
+  </section>
+
+  <section class="section" style="border-bottom: none; padding-bottom: 0;">
+    <div class="alert-card" style="font-size: 22px; font-family: 'Syne', sans-serif; font-weight: 700; line-height: 1.4; color: #00e5b4; border-color: rgba(0,229,180,0.35); background: rgba(0,229,180,0.07); letter-spacing: -0.01em;">
+      Si te entusiasma construir, aprender y ser parte de algo con un potencial gigante, ¡queremos conocerte!
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <h2>¿Sentís que esto es para vos?</h2>
+    <p>No lo pienses más. Completá el formulario y nos ponemos en contacto.</p>
+    <a href="apply.html?position=Técnico+en+Instalación+y+Mantenimiento" class="cta-btn">
+      Postularme
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    BPE · Búsquedas Para Empresas
+  </div>
+</footer>
+
+</body>
+</html>
