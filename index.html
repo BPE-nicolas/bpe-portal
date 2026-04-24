@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPE — Búsquedas Para Empresas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0d0f;
+    --bg2: #0f1318;
+    --bg3: #141a22;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00e5b4;
+    --accent2: #00b8ff;
+    --text: #e8edf2;
+    --muted: #7a8a99;
+    --card: #111820;
+    --tag-bg: rgba(0,229,180,0.08);
+    --tag-text: #00e5b4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND GRID */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* GLOW ORB */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,229,180,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    padding: 28px 0 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border2);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 72px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-label.muted {
+    color: var(--muted);
+  }
+
+  .section-label.muted::before {
+    background: var(--muted);
+  }
+
+  .section h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 3vw, 26px);
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  /* JOB CARDS LIST */
+  .jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ACTIVE JOB CARD */
+  .job-card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .job-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .job-card:hover {
+    border-color: rgba(0,229,180,0.35);
+    transform: translateY(-2px);
+  }
+
+  .job-card-body { flex: 1; min-width: 0; }
+
+  .job-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .job-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .job-card-meta span {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .job-card-meta span + span::before {
+    content: '·';
+    margin-right: 3px;
+    opacity: 0.4;
+  }
+
+  .job-card-cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #04221a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 10px 20px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: box-shadow 0.15s;
+  }
+
+  .job-card:hover .job-card-cta {
+    box-shadow: 0 4px 24px rgba(0,229,180,0.25);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .badge-active {
+    background: rgba(0,229,180,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,229,180,0.25);
+  }
+
+  .badge-active::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* CLOSED JOB CARD */
+  .job-card.closed {
+    opacity: 0.5;
+    pointer-events: none;
+    border-color: var(--border);
+    cursor: default;
+  }
+
+  .job-card.closed::before {
+    background: var(--muted);
+  }
+
+  .badge-closed {
+    background: rgba(122,138,153,0.1);
+    color: var(--muted);
+    border: 1px solid rgba(122,138,153,0.2);
+  }
+
+  .job-card-cta-closed {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .empty-state p {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero { animation: fadeUp 0.5s ease both; }
+  .section:nth-of-type(1) { animation: fadeUp 0.5s ease 0.05s both; }
+  .section:nth-of-type(2) { animation: fadeUp 0.5s ease 0.1s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 48px 0 40px; }
+    .section { padding: 48px 0; }
+    .job-card { flex-direction: column; align-items: flex-start; }
+    .job-card-cta, .job-card-cta-closed { align-self: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <nav class="nav-inner">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        BPE
+      </div>
+      <div class="nav-badge">Búsquedas Para Empresas</div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Portal de empleo</div>
+    <h1>Posiciones abiertas para <span>perfiles reales</span></h1>
+    <p class="hero-subtitle">
+      Publicamos búsquedas activas de empresas que buscan talento. Cada posición tiene su propio proceso de selección. Revisá las oportunidades disponibles y postulate directamente desde la descripción del rol.
+    </p>
+  </section>
+
+  <!-- BÚSQUEDAS ACTIVAS -->
+  <section class="section">
+    <div class="section-label">Búsquedas activas</div>
+    <h2>Posiciones abiertas</h2>
+
+    <div class="jobs-list">
+      <!--
+        INSTRUCCIÓN PARA AGREGAR UNA BÚSQUEDA ACTIVA:
+        Copiá el bloque <a class="job-card"> de abajo, completá los datos y eliminá este comentario cuando haya posiciones activas.
+
+        <a href="nombre-del-archivo.html" class="job-card">
+          <div class="job-card-body">
+            <div class="job-card-title">Título del rol</div>
+            <div class="job-card-meta">
+              <span><span class="badge badge-active">Activa</span></span>
+              <span>Empresa</span>
+              <span>Ubicación</span>
+              <span>Full-time</span>
+              <span>Publicada: Mes Año</span>
+            </div>
+          </div>
+          <div class="job-card-cta">
+            Ver posición
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </a>
+      -->
+
+      <a href="IHTL-Tec-instalador.html" class="job-card">
+        <div class="job-card-body">
+          <div class="job-card-title">Técnico en Instalación y Mantenimiento de Equipos de Seguridad</div>
+          <div class="job-card-meta">
+            <span><span class="badge badge-active">Activa</span></span>
+            <span>IH Tech Labs</span>
+            <span>San Cristóbal, CABA</span>
+            <span>Full-time</span>
+            <span>Publicada: Abril 2026</span>
+          </div>
+        </div>
+        <div class="job-card-cta">
+          Ver posición
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- BÚSQUEDAS FINALIZADAS -->
+  <section class="section" style="border-bottom: none;">
+    <div class="section-label muted">Búsquedas finalizadas</div>
+    <h2 style="color: var(--muted);">Posiciones cerradas</h2>
+
+    <div class="jobs-list">
+
+      <div class="job-card closed">
+        <div class="job-card-body">
+          <div class="job-card-title">Sales Development Representative (SDR)</div>
+          <div class="job-card-meta">
+            <span><span class="badge badge-closed">Finalizada</span></span>
+            <span>IH Tech Labs</span>
+            <span>CABA</span>
+            <span>Full-time</span>
+            <span>Publicada: Octubre 2025</span>
+          </div>
+        </div>
+        <div class="job-card-cta-closed">Cerrada</div>
+      </div>
+
+      <div class="job-card closed">
+        <div class="job-card-body">
+          <div class="job-card-title">Sales Executive</div>
+          <div class="job-card-meta">
+            <span><span class="badge badge-closed">Finalizada</span></span>
+            <span>IH Tech Labs</span>
+            <span>CABA</span>
+            <span>Full-time</span>
+            <span>Publicada: Noviembre 2025</span>
+          </div>
+        </div>
+        <div class="job-card-cta-closed">Cerrada</div>
+      </div>
+
+      <div class="job-card closed">
+        <div class="job-card-body">
+          <div class="job-card-title">Operations Manager</div>
+          <div class="job-card-meta">
+            <span><span class="badge badge-closed">Finalizada</span></span>
+            <span>Confidencial</span>
+            <span>CABA</span>
+            <span>Full-time</span>
+            <span>Publicada: Marzo 2026</span>
+          </div>
+        </div>
+        <div class="job-card-cta-closed">Cerrada</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    BPE · Búsquedas Para Empresas
+  </div>
+</footer>
+
+</body>
+</html>

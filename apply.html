@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postularse — BPE</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0d0f;
+    --bg2: #0f1318;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00e5b4;
+    --text: #e8edf2;
+    --muted: #7a8a99;
+    --card: #111820;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,229,180,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    padding: 28px 0 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+  }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .hero-position {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .hero-position span {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* FORM */
+  .form-section {
+    padding: 56px 0 80px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  label .required {
+    color: var(--accent);
+    margin-left: 2px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"] {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus {
+    border-color: rgba(0,229,180,0.4);
+    box-shadow: 0 0 0 3px rgba(0,229,180,0.07);
+  }
+
+  input::placeholder { color: var(--muted); opacity: 0.6; }
+
+  /* FILE UPLOAD */
+  .file-upload-area {
+    border: 1.5px dashed var(--border2);
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .file-upload-area:hover,
+  .file-upload-area.drag-over {
+    border-color: rgba(0,229,180,0.4);
+    background: rgba(0,229,180,0.03);
+  }
+
+  .file-upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .file-upload-icon {
+    margin: 0 auto 12px;
+    opacity: 0.5;
+  }
+
+  .file-upload-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .file-upload-text strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .file-name {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--accent);
+    display: none;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .file-name.visible { display: flex; }
+
+  /* ROW */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* DIVIDER */
+  .form-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* SUBMIT */
+  .submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #04221a;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+    padding: 16px 36px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 40px rgba(0,229,180,0.3);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* SPINNER */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(4,34,26,0.3);
+    border-top-color: #04221a;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* SUCCESS / ERROR STATES */
+  .form-feedback {
+    display: none;
+    border-radius: 14px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  .form-feedback.visible { display: block; }
+
+  .form-feedback.success {
+    background: rgba(0,229,180,0.05);
+    border: 1px solid rgba(0,229,180,0.2);
+  }
+
+  .form-feedback.error {
+    background: rgba(255,80,80,0.05);
+    border: 1px solid rgba(255,80,80,0.2);
+  }
+
+  .form-feedback h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .form-feedback.success h2 { color: var(--accent); }
+  .form-feedback.error h2 { color: #ff6060; }
+
+  .form-feedback p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .form-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero { animation: fadeUp 0.5s ease both; }
+  .form-section { animation: fadeUp 0.5s ease 0.05s both; }
+
+  @media (max-width: 540px) {
+    .form-row { grid-template-columns: 1fr; }
+    .hero { padding: 40px 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <nav class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-dot"></div>
+        BPE
+      </a>
+      <a href="javascript:history.back()" class="back-link">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+        Volver a la posición
+      </a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Postulación</div>
+    <h1>Completá tu aplicación</h1>
+    <p class="hero-position">Aplicando a: <span id="position-display">esta posición</span></p>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section">
+
+    <!-- SUCCESS / ERROR FEEDBACK -->
+    <div class="form-feedback success" id="feedback-success">
+      <h2>¡Postulación enviada!</h2>
+      <p>Recibimos tu información. Si tu perfil encaja con la búsqueda, nos pondremos en contacto dentro de los próximos días.</p>
+    </div>
+
+    <div class="form-feedback error" id="feedback-error">
+      <h2>Algo salió mal</h2>
+      <p>Hubo un error al enviar tu postulación. Por favor, intentalo nuevamente en unos minutos.</p>
+    </div>
+
+    <!-- MAIN FORM -->
+    <form id="apply-form">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre <span class="required">*</span></label>
+          <input type="text" id="nombre" name="nombre" placeholder="Juan" required>
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido <span class="required">*</span></label>
+          <input type="text" id="apellido" name="apellido" placeholder="García" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono <span class="required">*</span></label>
+        <input type="tel" id="telefono" name="telefono" placeholder="+54 9 11 1234 5678" required>
+      </div>
+
+      <div class="form-group">
+        <label for="linkedin">Perfil de LinkedIn <span class="required">*</span></label>
+        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/tu-perfil" required>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <div class="form-group">
+        <label>Currículum <span class="required">*</span></label>
+        <div class="file-upload-area" id="file-area">
+          <input type="file" id="cv-file" name="cv" accept=".pdf,.doc,.docx" required>
+          <svg class="file-upload-icon" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+          </svg>
+          <div class="file-upload-text">
+            <strong>Seleccioná un archivo</strong> o arrastralo aquí<br>
+            PDF, DOC o DOCX · Máximo 5 MB
+          </div>
+          <div class="file-name" id="file-name-display">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span id="file-name-text"></span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span id="btn-text">Enviar postulación</span>
+        <div class="spinner" id="btn-spinner"></div>
+        <svg id="btn-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </button>
+
+      <p class="form-note">Tu información se usa únicamente para este proceso de selección.<br>No compartimos tus datos con terceros.</p>
+
+    </form>
+
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    BPE · Búsquedas Para Empresas
+  </div>
+</footer>
+
+<script>
+  // ─── CONFIGURACIÓN ───────────────────────────────────────────────
+  // Pegá aquí la URL de tu Google Apps Script Web App una vez deployado:
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHtzwUMAXBHW7RwZtr2Utz4ryZj5LfaAeuoUX6ndHp-cfE0rojyIXj6GDtocTExAlj/exec';
+  // ─────────────────────────────────────────────────────────────────
+
+  // Leer nombre de la posición desde la URL: apply.html?position=SDR
+  const params = new URLSearchParams(window.location.search);
+  const positionName = params.get('position') || 'esta posición';
+  document.getElementById('position-display').textContent = decodeURIComponent(positionName);
+
+  // Mostrar nombre del archivo seleccionado
+  const cvInput = document.getElementById('cv-file');
+  const fileNameDisplay = document.getElementById('file-name-display');
+  const fileNameText = document.getElementById('file-name-text');
+  const fileArea = document.getElementById('file-area');
+
+  cvInput.addEventListener('change', () => {
+    if (cvInput.files.length > 0) {
+      fileNameText.textContent = cvInput.files[0].name;
+      fileNameDisplay.classList.add('visible');
+    }
+  });
+
+  // Drag & Drop visual
+  fileArea.addEventListener('dragover', (e) => { e.preventDefault(); fileArea.classList.add('drag-over'); });
+  fileArea.addEventListener('dragleave', () => fileArea.classList.remove('drag-over'));
+  fileArea.addEventListener('drop', () => fileArea.classList.remove('drag-over'));
+
+  // SUBMIT
+  document.getElementById('apply-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const spinner = document.getElementById('btn-spinner');
+    const btnIcon = document.getElementById('btn-icon');
+
+    // Validar tamaño del archivo (5 MB)
+    const file = cvInput.files[0];
+    if (!file) { alert('Por favor adjuntá tu currículum.'); return; }
+    if (file.size > 5 * 1024 * 1024) { alert('El archivo supera los 5 MB. Por favor comprimilo e intentá de nuevo.'); return; }
+
+    // UI: loading
+    btn.disabled = true;
+    btnText.textContent = 'Enviando...';
+    spinner.style.display = 'block';
+    btnIcon.style.display = 'none';
+
+    try {
+      // Convertir archivo a base64
+      const fileBase64 = await fileToBase64(file);
+
+      const payload = {
+        position: decodeURIComponent(positionName),
+        nombre: document.getElementById('nombre').value.trim(),
+        apellido: document.getElementById('apellido').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        telefono: document.getElementById('telefono').value.trim(),
+        linkedin: document.getElementById('linkedin').value.trim(),
+        fileName: file.name,
+        fileType: file.type,
+        fileBase64: fileBase64
+      };
+
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'ok') {
+        document.getElementById('apply-form').style.display = 'none';
+        document.getElementById('feedback-success').classList.add('visible');
+      } else {
+        throw new Error(result.message || 'Error desconocido');
+      }
+
+    } catch (err) {
+      console.error(err);
+      document.getElementById('apply-form').style.display = 'none';
+      document.getElementById('feedback-error').classList.add('visible');
+    }
+  });
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        // Quitar el prefijo "data:...;base64,"
+        const base64 = reader.result.split(',')[1];
+        resolve(base64);
+      };
+      reader.onerror = reject;
+    });
+  }
+</script>
+
+</body>
+</html>
