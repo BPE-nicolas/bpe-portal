@@ -4,132 +4,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BPE — Búsquedas Para Empresas</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0d0f;
-    --bg2: #0f1318;
-    --bg3: #141a22;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --accent: #00e5b4;
-    --accent2: #00b8ff;
-    --text: #e8edf2;
-    --muted: #7a8a99;
-    --card: #111820;
-    --tag-bg: rgba(0,229,180,0.08);
-    --tag-text: #00e5b4;
+    --ink: #0C1B22;
+    --green: #6E3B93;
+    --aqua: #46C6AC;
+    --violet: #6E3B93;
+    --lilac: #AE8CD6;
+    --gray: #4A5A60;
+    --gray2: #6D7C82;
+    --silver: #C3C9CF;
+    --fog: #F5F7F6;
+    --white: #FFFFFF;
+    --border: #DDE3E1;
+    --border2: #E6EAE9;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    background: var(--fog);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
-  /* BACKGROUND GRID */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
-  /* GLOW ORB */
-  body::after {
-    content: '';
-    position: fixed;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0,229,180,0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* LAYOUT */
   .container {
-    max-width: 820px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 0 24px;
-    position: relative;
-    z-index: 1;
   }
 
   /* HEADER */
   header {
-    padding: 28px 0 0;
-    position: relative;
-    z-index: 2;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
   }
 
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
+    padding: 26px 0;
   }
 
   .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: 0.04em;
-    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .logo-dot {
-    width: 8px;
-    height: 8px;
+  .logo-mark {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
     flex-shrink: 0;
   }
 
   .nav-badge {
     font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--border2);
-    padding: 4px 12px;
-    border-radius: 100px;
+    color: var(--gray2);
   }
 
   /* HERO */
   .hero {
-    padding: 72px 0 64px;
-    border-bottom: 1px solid var(--border);
+    background: var(--ink);
+    color: var(--fog);
+    padding: 76px 0 68px;
+    position: relative;
+    overflow: hidden;
   }
 
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -140px;
+    top: -140px;
+    width: 340px;
+    height: 340px;
+    border: 1.5px solid rgba(70,198,172,0.22);
+    border-radius: 50%;
+  }
+
+  .hero-inner { position: relative; }
+
   .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--aqua);
+    margin-bottom: 22px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .hero-eyebrow::before {
@@ -137,45 +121,42 @@
     display: block;
     width: 28px;
     height: 1px;
-    background: var(--accent);
+    background: var(--aqua);
   }
 
   .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(30px, 5vw, 48px);
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 50px);
     line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--text);
+    letter-spacing: -0.03em;
     margin-bottom: 20px;
   }
 
-  .hero h1 span { color: var(--accent); }
+  .hero h1 span { font-weight: 700; color: var(--aqua); }
 
   .hero-subtitle {
     font-size: 17px;
-    color: var(--muted);
+    line-height: 1.65;
+    color: rgba(245,247,246,0.72);
     max-width: 560px;
-    line-height: 1.7;
   }
 
   /* SECTION */
   .section {
-    padding: 64px 0;
+    padding: 60px 0;
     border-bottom: 1px solid var(--border);
   }
 
   .section:last-of-type { border-bottom: none; }
 
   .section-label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 28px;
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .section-label::before {
@@ -183,72 +164,55 @@
     display: block;
     width: 28px;
     height: 1px;
-    background: var(--accent);
+    background: var(--green);
   }
 
-  .section-label.muted {
-    color: var(--muted);
-  }
-
-  .section-label.muted::before {
-    background: var(--muted);
-  }
+  .section-label.muted { color: var(--gray2); }
+  .section-label.muted::before { background: var(--gray2); }
 
   .section h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: clamp(20px, 3vw, 26px);
-    letter-spacing: -0.01em;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: clamp(21px, 3vw, 27px);
+    letter-spacing: -0.02em;
     margin-bottom: 28px;
-    color: var(--text);
+    color: var(--ink);
   }
 
-  /* JOB CARDS LIST */
+  .section h2.muted { color: var(--gray); }
+
+  /* JOB CARDS */
   .jobs-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
-  /* ACTIVE JOB CARD */
   .job-card {
-    background: var(--card);
-    border: 1px solid var(--border2);
-    border-radius: 14px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--green);
     padding: 24px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
     text-decoration: none;
-    transition: border-color 0.2s, transform 0.15s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .job-card::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent);
-    border-radius: 3px 0 0 3px;
+    transition: box-shadow 0.15s, transform 0.15s;
   }
 
   .job-card:hover {
-    border-color: rgba(0,229,180,0.35);
+    box-shadow: 0 6px 24px rgba(12,27,34,0.08);
     transform: translateY(-2px);
   }
 
   .job-card-body { flex: 1; min-width: 0; }
 
   .job-card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
     font-size: 17px;
-    color: var(--text);
+    color: var(--ink);
     margin-bottom: 8px;
   }
 
@@ -261,7 +225,7 @@
 
   .job-card-meta span {
     font-size: 13px;
-    color: var(--muted);
+    color: var(--gray);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -270,7 +234,7 @@
   .job-card-meta span + span::before {
     content: '·';
     margin-right: 3px;
-    opacity: 0.4;
+    color: var(--silver);
   }
 
   .job-card-cta {
@@ -278,39 +242,27 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent);
-    color: #04221a;
-    font-family: 'Syne', sans-serif;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 0.02em;
     padding: 10px 20px;
-    border-radius: 100px;
     white-space: nowrap;
-    transition: box-shadow 0.15s;
-  }
-
-  .job-card:hover .job-card-cta {
-    box-shadow: 0 4px 24px rgba(0,229,180,0.25);
   }
 
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 100px;
+    font-weight: 500;
   }
 
-  .badge-active {
-    background: rgba(0,229,180,0.1);
-    color: var(--accent);
-    border: 1px solid rgba(0,229,180,0.25);
-  }
+  .badge-active { color: var(--green); }
 
   .badge-active::before {
     content: '';
@@ -318,80 +270,58 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 6px var(--accent);
+    background: var(--green);
   }
 
   /* CLOSED JOB CARD */
   .job-card.closed {
-    opacity: 0.5;
+    opacity: 0.55;
     pointer-events: none;
-    border-color: var(--border);
-    cursor: default;
+    border-top-color: var(--silver);
   }
 
-  .job-card.closed::before {
-    background: var(--muted);
-  }
-
-  .badge-closed {
-    background: rgba(122,138,153,0.1);
-    color: var(--muted);
-    border: 1px solid rgba(122,138,153,0.2);
-  }
+  .badge-closed { color: var(--gray2); }
 
   .job-card-cta-closed {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
-    color: var(--muted);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--gray2);
     padding: 10px 20px;
-    border-radius: 100px;
     border: 1px solid var(--border);
     white-space: nowrap;
   }
 
   /* EMPTY STATE */
   .empty-state {
-    border: 1px dashed rgba(255,255,255,0.1);
-    border-radius: 14px;
+    border: 1px dashed var(--silver);
     padding: 48px 24px;
     text-align: center;
+    background: var(--white);
   }
 
   .empty-state p {
     font-size: 15px;
-    color: var(--muted);
+    color: var(--gray);
   }
 
   /* FOOTER */
   .footer {
-    border-top: 1px solid var(--border);
+    background: var(--ink);
     padding: 24px 0;
     text-align: center;
-    font-size: 13px;
-    color: var(--muted);
-    position: relative;
-    z-index: 1;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(245,247,246,0.6);
   }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero { animation: fadeUp 0.5s ease both; }
-  .section:nth-of-type(1) { animation: fadeUp 0.5s ease 0.05s both; }
-  .section:nth-of-type(2) { animation: fadeUp 0.5s ease 0.1s both; }
 
   /* RESPONSIVE */
   @media (max-width: 600px) {
-    .hero { padding: 48px 0 40px; }
-    .section { padding: 48px 0; }
+    .hero { padding: 52px 0 44px; }
+    .section { padding: 44px 0; }
     .job-card { flex-direction: column; align-items: flex-start; }
     .job-card-cta, .job-card-cta-closed { align-self: flex-start; }
   }
@@ -399,31 +329,34 @@
 </head>
 <body>
 
-<div class="container">
-
-  <!-- HEADER -->
-  <header>
+<header>
+  <div class="container">
     <nav class="nav-inner">
       <div class="logo">
-        <div class="logo-dot"></div>
+        <div class="logo-mark"></div>
         BPE
       </div>
-      <div class="nav-badge">Búsquedas Para Empresas</div>
+      <div class="nav-badge mono">Búsquedas Para Empresas</div>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-eyebrow">Portal de empleo</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow mono">Portal de empleo</div>
     <h1>Posiciones abiertas para <span>perfiles reales</span></h1>
     <p class="hero-subtitle">
       Publicamos búsquedas activas de empresas que buscan talento. Cada posición tiene su propio proceso de selección. Revisá las oportunidades disponibles y postulate directamente desde la descripción del rol.
     </p>
-  </section>
+  </div>
+</section>
+
+<div class="container">
 
   <!-- BÚSQUEDAS ACTIVAS -->
   <section class="section">
-    <div class="section-label">Búsquedas activas</div>
+    <div class="section-label mono">Búsquedas activas</div>
     <h2>Posiciones abiertas</h2>
 
     <div class="jobs-list">
@@ -449,7 +382,7 @@
         </a>
       -->
 
-      <a href="AI_Remax.html" class="job-card">
+      <a href="AI_Remax-Draft.HTML" class="job-card">
         <div class="job-card-body">
           <div class="job-card-title">Agente Inmobiliario RE/MAX</div>
           <div class="job-card-meta">
@@ -470,8 +403,8 @@
 
   <!-- BÚSQUEDAS FINALIZADAS -->
   <section class="section" style="border-bottom: none;">
-    <div class="section-label muted">Búsquedas finalizadas</div>
-    <h2 style="color: var(--muted);">Posiciones cerradas</h2>
+    <div class="section-label mono muted">Búsquedas finalizadas</div>
+    <h2 class="muted">Posiciones cerradas</h2>
 
     <div class="jobs-list">
 
@@ -537,9 +470,7 @@
 </div>
 
 <footer class="footer">
-  <div class="container">
-    BPE · Búsquedas Para Empresas
-  </div>
+  BPE · Búsquedas Para Empresas
 </footer>
 
 </body>

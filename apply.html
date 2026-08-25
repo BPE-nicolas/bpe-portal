@@ -4,103 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Postularse — BPE</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0d0f;
-    --bg2: #0f1318;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --accent: #00e5b4;
-    --text: #e8edf2;
-    --muted: #7a8a99;
-    --card: #111820;
+    --ink: #0C1B22;
+    --accent: #6E3B93;
+    --aqua: #46C6AC;
+    --gray: #4A5A60;
+    --gray2: #6D7C82;
+    --silver: #C3C9CF;
+    --fog: #F5F7F6;
+    --white: #FFFFFF;
+    --border: #DDE3E1;
+    --error: #A4423F;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    background: var(--fog);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    top: -200px;
-    right: -200px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0,229,180,0.06) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   .container {
     max-width: 640px;
     margin: 0 auto;
     padding: 0 24px;
-    position: relative;
-    z-index: 1;
   }
 
-  header {
-    padding: 28px 0 0;
-    position: relative;
-    z-index: 2;
+  /* HEADER + HERO */
+  .top {
+    background: var(--ink);
+    color: var(--fog);
   }
+
+  header { padding: 26px 0; border-bottom: 1px solid rgba(245,247,246,0.1); }
 
   .nav-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
   }
 
   .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 17px;
-    letter-spacing: 0.04em;
-    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--fog);
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
   }
 
-  .logo-dot {
-    width: 8px;
-    height: 8px;
+  .logo-mark {
+    width: 9px;
+    height: 9px;
+    background: var(--aqua);
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
     flex-shrink: 0;
   }
 
   .back-link {
     font-size: 13px;
-    color: var(--muted);
+    color: rgba(245,247,246,0.6);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -108,23 +90,17 @@
     transition: color 0.2s;
   }
 
-  .back-link:hover { color: var(--text); }
+  .back-link:hover { color: var(--fog); }
 
-  /* HERO */
-  .hero {
-    padding: 60px 0 48px;
-    border-bottom: 1px solid var(--border);
-  }
+  .hero { padding: 48px 0 44px; }
 
   .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-size: 12px;
+    color: var(--aqua);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .hero-eyebrow::before {
@@ -132,64 +108,60 @@
     display: block;
     width: 28px;
     height: 1px;
-    background: var(--accent);
+    background: var(--aqua);
   }
 
   .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(26px, 4vw, 36px);
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 38px);
     line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: var(--text);
+    letter-spacing: -0.03em;
     margin-bottom: 10px;
   }
 
   .hero-position {
     font-size: 15px;
-    color: var(--muted);
+    color: rgba(245,247,246,0.62);
   }
 
   .hero-position span {
-    color: var(--accent);
-    font-weight: 500;
+    color: var(--fog);
+    font-weight: 600;
   }
 
   /* FORM */
   .form-section {
-    padding: 56px 0 80px;
+    padding: 48px 0 72px;
   }
 
   .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   label {
     display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--gray);
     margin-bottom: 8px;
-    letter-spacing: 0.01em;
   }
 
-  label .required {
-    color: var(--accent);
-    margin-left: 2px;
-  }
+  label .required { color: var(--accent); margin-left: 2px; }
 
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   input[type="url"] {
     width: 100%;
-    background: var(--card);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
     padding: 13px 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Karla', sans-serif;
     font-size: 15px;
-    color: var(--text);
+    color: var(--ink);
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
@@ -199,27 +171,28 @@
   input[type="email"]:focus,
   input[type="tel"]:focus,
   input[type="url"]:focus {
-    border-color: rgba(0,229,180,0.4);
-    box-shadow: 0 0 0 3px rgba(0,229,180,0.07);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110,59,147,0.1);
   }
 
-  input::placeholder { color: var(--muted); opacity: 0.6; }
+  input::placeholder { color: var(--silver); }
 
   /* FILE UPLOAD */
   .file-upload-area {
-    border: 1.5px dashed var(--border2);
-    border-radius: 12px;
+    border: 1.5px dashed var(--silver);
+    border-radius: 2px;
     padding: 32px 24px;
     text-align: center;
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
     position: relative;
+    background: var(--white);
   }
 
   .file-upload-area:hover,
   .file-upload-area.drag-over {
-    border-color: rgba(0,229,180,0.4);
-    background: rgba(0,229,180,0.03);
+    border-color: var(--accent);
+    background: rgba(110,59,147,0.03);
   }
 
   .file-upload-area input[type="file"] {
@@ -233,12 +206,12 @@
 
   .file-upload-icon {
     margin: 0 auto 12px;
-    opacity: 0.5;
+    color: var(--gray2);
   }
 
   .file-upload-text {
     font-size: 14px;
-    color: var(--muted);
+    color: var(--gray);
     line-height: 1.6;
   }
 
@@ -249,7 +222,8 @@
 
   .file-name {
     margin-top: 12px;
-    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
     color: var(--accent);
     display: none;
     align-items: center;
@@ -281,13 +255,12 @@
     justify-content: center;
     gap: 10px;
     background: var(--accent);
-    color: #04221a;
-    font-family: 'Syne', sans-serif;
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
     font-weight: 700;
     font-size: 15px;
-    letter-spacing: 0.03em;
     padding: 16px 36px;
-    border-radius: 100px;
+    border-radius: 2px;
     border: none;
     cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
@@ -296,7 +269,7 @@
 
   .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 40px rgba(0,229,180,0.3);
+    box-shadow: 0 8px 30px rgba(110,59,147,0.28);
   }
 
   .submit-btn:active { transform: translateY(0); }
@@ -312,8 +285,8 @@
   .spinner {
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(4,34,26,0.3);
-    border-top-color: #04221a;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: var(--white);
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     display: none;
@@ -324,7 +297,7 @@
   /* SUCCESS / ERROR STATES */
   .form-feedback {
     display: none;
-    border-radius: 14px;
+    border-radius: 2px;
     padding: 40px 32px;
     text-align: center;
   }
@@ -332,90 +305,88 @@
   .form-feedback.visible { display: block; }
 
   .form-feedback.success {
-    background: rgba(0,229,180,0.05);
-    border: 1px solid rgba(0,229,180,0.2);
+    background: var(--white);
+    border-top: 3px solid var(--accent);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
   }
 
   .form-feedback.error {
-    background: rgba(255,80,80,0.05);
-    border: 1px solid rgba(255,80,80,0.2);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--error);
   }
 
   .form-feedback h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
     font-size: 22px;
+    letter-spacing: -0.01em;
     margin-bottom: 10px;
   }
 
   .form-feedback.success h2 { color: var(--accent); }
-  .form-feedback.error h2 { color: #ff6060; }
+  .form-feedback.error h2 { color: var(--error); }
 
   .form-feedback p {
     font-size: 15px;
-    color: var(--muted);
-    line-height: 1.7;
+    color: var(--gray);
+    line-height: 1.65;
   }
 
   .form-note {
     margin-top: 16px;
     font-size: 12px;
-    color: var(--muted);
+    color: var(--gray2);
     text-align: center;
     line-height: 1.6;
-    opacity: 0.7;
   }
 
   /* FOOTER */
   .footer {
-    border-top: 1px solid var(--border);
+    background: var(--ink);
     padding: 24px 0;
     text-align: center;
-    font-size: 13px;
-    color: var(--muted);
-    position: relative;
-    z-index: 1;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(245,247,246,0.6);
   }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero { animation: fadeUp 0.5s ease both; }
-  .form-section { animation: fadeUp 0.5s ease 0.05s both; }
 
   @media (max-width: 540px) {
     .form-row { grid-template-columns: 1fr; }
-    .hero { padding: 40px 0 32px; }
+    .hero { padding: 36px 0 32px; }
   }
 </style>
 </head>
 <body>
 
+<div class="top">
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <nav class="nav-inner">
+        <a href="index.html" class="logo">
+          <div class="logo-mark"></div>
+          BPE
+        </a>
+        <a href="javascript:history.back()" class="back-link">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+          Volver a la posición
+        </a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow mono">Postulación</div>
+      <h1>Completá tu aplicación</h1>
+      <p class="hero-position">Aplicando a: <span id="position-display">esta posición</span></p>
+    </section>
+  </div>
+</div>
+
 <div class="container">
-
-  <!-- HEADER -->
-  <header>
-    <nav class="nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-dot"></div>
-        BPE
-      </a>
-      <a href="javascript:history.back()" class="back-link">
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
-        Volver a la posición
-      </a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-eyebrow">Postulación</div>
-    <h1>Completá tu aplicación</h1>
-    <p class="hero-position">Aplicando a: <span id="position-display">esta posición</span></p>
-  </section>
 
   <!-- FORM -->
   <section class="form-section">
@@ -429,7 +400,6 @@
     <div class="form-feedback error" id="feedback-error">
       <h2>Algo salió mal</h2>
       <p>Hubo un error al enviar tu postulación. Por favor, intentalo nuevamente en unos minutos.</p>
-      <p style="margin-top: 12px;">Si el problema persiste, podés enviarnos tu CV y datos directamente a <a href="mailto:busquedasparaempresas@gmail.com" style="color: #ff6060;">busquedasparaempresas@gmail.com</a> indicando el puesto al que querés aplicar.</p>
     </div>
 
     <!-- MAIN FORM -->
@@ -496,9 +466,7 @@
 </div>
 
 <footer class="footer">
-  <div class="container">
-    BPE · Búsquedas Para Empresas
-  </div>
+  BPE · Búsquedas Para Empresas
 </footer>
 
 <script>
@@ -566,16 +534,20 @@
         fileBase64: fileBase64
       };
 
-      await fetch(APPS_SCRIPT_URL, {
+      const response = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      // Con no-cors no podemos leer la respuesta, asumimos éxito
-      document.getElementById('apply-form').style.display = 'none';
-      document.getElementById('feedback-success').classList.add('visible');
+      const result = await response.json();
+
+      if (result.status === 'ok') {
+        document.getElementById('apply-form').style.display = 'none';
+        document.getElementById('feedback-success').classList.add('visible');
+      } else {
+        throw new Error(result.message || 'Error desconocido');
+      }
 
     } catch (err) {
       console.error(err);
