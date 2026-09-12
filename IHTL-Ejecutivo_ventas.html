@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejecutivo de Ventas | IH Tech Labs — BPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0C1B22;
+    --green: #6E3B93;
+    --aqua: #46C6AC;
+    --violet: #6E3B93;
+    --lilac: #AE8CD6;
+    --gray: #4A5A60;
+    --gray2: #6D7C82;
+    --silver: #C3C9CF;
+    --fog: #F5F7F6;
+    --white: #FFFFFF;
+    --border: #DDE3E1;
+    --border2: #E6EAE9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fog);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+  }
+
+  .logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    color: var(--gray2);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: var(--fog);
+    padding: 76px 0 68px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -140px;
+    top: -140px;
+    width: 340px;
+    height: 340px;
+    border: 1.5px solid rgba(70,198,172,0.22);
+    border-radius: 50%;
+  }
+
+  .hero-inner { position: relative; }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    color: var(--aqua);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--aqua);
+  }
+
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4.4vw, 42px);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 span { font-weight: 700; color: var(--aqua); }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .hero-meta span {
+    font-size: 13px;
+    color: rgba(245,247,246,0.72);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .hero-meta span + span::before {
+    content: '·';
+    margin-right: 3px;
+    color: rgba(245,247,246,0.35);
+  }
+
+  /* SECTION */
+  .section {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .section h2 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: clamp(20px, 2.6vw, 24px);
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+
+  .section h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 24px 0 12px;
+  }
+
+  .section p {
+    color: var(--gray);
+    margin-bottom: 16px;
+    max-width: 700px;
+  }
+
+  .section a {
+    color: var(--green);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--lilac);
+  }
+
+  .section a:hover {
+    color: var(--violet);
+    border-bottom-color: var(--green);
+  }
+
+  .section strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .section ul, .section ol {
+    margin: 0 0 20px 20px;
+  }
+
+  .section li {
+    color: var(--gray);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--lilac);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    margin-bottom: 8px;
+    color: var(--gray);
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* INFO GRID (condiciones) */
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .info-row {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--green);
+    padding: 18px 24px;
+  }
+
+  .info-row .label {
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  .info-row .value {
+    color: var(--ink);
+    font-size: 15px;
+  }
+
+  /* APPLY */
+  .apply-card {
+    background: var(--white);
+    border: 1px dashed var(--silver);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .apply-card h2 {
+    margin-bottom: 24px;
+  }
+
+  .apply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 34px;
+    border: none;
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
+
+  .apply-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray2);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink);
+    padding: 24px 0;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(245,247,246,0.6);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 52px 0 44px; }
+    .section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        BPE
+      </div>
+      <div class="nav-badge mono">Búsquedas Para Empresas</div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow mono">Búsqueda activa</div>
+    <h1>Sumate como <span>Ejecutivo de Ventas</span> en IH Tech Labs</h1>
+    <div class="hero-meta">
+      <span>IH Tech Labs</span>
+      <span>San Cristobal, CABA</span>
+      <span>Full-time</span>
+      <span>Publicada: Septiembre 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <section class="section">
+    <div class="section-label mono">Sobre la empresa</div>
+    <h2>¿Listo para construir un área comercial desde cero y romperla en el mundo tech?</h2>
+
+    <p>En <strong>IH Tech Labs</strong> (www.ihtechlabs.com), el centro de innovación del <a href="https://securionglobal.com/" target="_blank">Grupo Securion</a>, estamos buscando un ejecutivo de ventas para seguir fortaleciendo y expandiendo nuestro equipo comercial. Combinamos la agilidad y la energía de una startup con el respaldo de un gigante de 12.000 empleados en todo el mundo.</p>
+
+    <p>Nos dedicamos a crear el futuro de la seguridad, desarrollando soluciones con diseño visionario y tecnología de punta como <strong>Inteligencia Artificial, IoT y sistemas autónomos</strong>. No solo vendemos tecnología, diseñamos un futuro donde la seguridad es sinónimo de confianza y progreso.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">El rol</div>
+    <h2>El Desafío: Sumarse al Dream Team Comercial</h2>
+
+    <p>Buscamos a nuestro próximo <strong>Ejecutivo de Ventas / Closer</strong>: el estratega, quien cierra los tratos y convierte las oportunidades en éxito.</p>
+
+    <p><strong>La misión es clara:</strong> potenciar los procesos de comercialización de nuestros productos y soluciones. Ya tenemos una base sólida de marketing y productos validados, pero necesitamos gente con hambre de crear y llevar el sistema comercial al siguiente nivel.</p>
+
+    <h3>¿Qué significa esto en el día a día?</h3>
+    <ul>
+      <li><strong>Visitar clientes y prospectos</strong> en sus instalaciones para entender sus riesgos y necesidades de seguridad de primera mano.</li>
+      <li><strong>Diseñar soluciones a medida</strong>, traduciendo capacidades técnicas (IA, IoT, drones, VMS) en propuestas de valor concretas para cada cliente.</li>
+      <li><strong>Gestionar ciclos de venta largos y complejos</strong>, coordinando con áreas técnicas para armar propuestas y presupuestos.</li>
+      <li><strong>Construir relaciones de confianza</strong> con tomadores de decisión (gerentes de seguridad, operaciones e infraestructura).</li>
+      <li><strong>Refinar y definir</strong> nuestro Perfil de Cliente Ideal (ICP) a partir de lo que vayas aprendiendo en cada visita.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Aviso importante:</strong> Si buscas un trabajo donde todo está armado y solo tienes que sentarte a ejecutar un proceso súper pulido, esta oportunidad no es para vos.</p>
+      <p>Si, en cambio, te apasiona construir, probar, medir e iterar hasta encontrar la fórmula del éxito, seguí leyendo.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">Producto y mercado</div>
+    <h2>¿Qué vendemos?</h2>
+    <p>Un ecosistema de seguridad de última generación, orquestado por <strong>MERCADA</strong>, nuestro software VMS (Video Management System). Este sistema centraliza toda la información de imágenes, sensores, IA y periféricos como drones, vehículos y lanchas autónomas.</p>
+
+    <h3>¿A quién le vendemos?</h3>
+    <p>Tenemos dos frentes principales:</p>
+    <ol>
+      <li><strong>Una cartera increíble:</strong> Acceso a empresas de primer nivel que ya son clientes del Grupo Securion.</li>
+      <li><strong>Nuevos mercados:</strong> Salir a prospectar y conquistar clientes como barrios privados, desarrolladoras inmobiliarias y grandes empresas con instalaciones críticas.</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">Perfil buscado</div>
+    <h2>¿Qué buscamos en vos?</h2>
+    <p>Más allá de la experiencia, buscamos una mentalidad.</p>
+    <ul>
+      <li><strong>Actitud emprendedora:</strong> Ves oportunidades donde otros ven problemas.</li>
+      <li><strong>Energía y proactividad:</strong> Tenés ganas de aprender, proponer y hacer que las cosas pasen.</li>
+      <li><strong>Power y ganas de romperla:</strong> Te motivan los desafíos y querés crecer a lo grande.</li>
+      <li><strong>Experiencia prospectando:</strong> Sabés cómo buscar y encontrar clientes potenciales (la venta es 100% B2B).</li>
+      <li><strong>Suma puntos:</strong> Si tenés tu propia cartera de empresas.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">Condiciones</div>
+    <h2>Las Condiciones</h2>
+    <div class="info-grid">
+      <div class="info-row">
+        <div class="label mono">Formato</div>
+        <div class="value">Full-time, con flexibilidad de horarios. Al principio, necesitamos que vengas bastante a nuestra oficina en San Cristobal (CABA) para que nos conozcamos y co-creemos juntos.</div>
+      </div>
+      <div class="info-row">
+        <div class="label mono">Contratación</div>
+        <div class="value">El formato inicial es contractor en Argentina, con facturación en pesos argentinos.</div>
+      </div>
+      <div class="info-row">
+        <div class="label mono">Honorarios</div>
+        <div class="value">Estimamos un rango entre <strong>$2.400.000 y $3.800.000 ARS</strong>, a definir según tu experiencia y conocimientos.</div>
+      </div>
+      <div class="info-row">
+        <div class="label mono">Compensación</div>
+        <div class="value">Arrancamos con un salario fijo, pero ya estamos planeando incorporar un esquema de comisiones por ventas trimestrales en cuanto definamos las métricas clave.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="border-bottom: none;">
+    <div class="apply-card">
+      <h2>¿Sentís que esto es para vos?</h2>
+      <button type="button" class="apply-btn" disabled title="Formulario en construcción">Postulate</button>
+      <div class="apply-note mono">Formulario en construcción</div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  BPE · Búsquedas Para Empresas
+</footer>
+
+</body>
+</html>
