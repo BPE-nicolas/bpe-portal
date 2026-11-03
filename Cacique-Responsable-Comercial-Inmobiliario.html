@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0M450EK5M7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0M450EK5M7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsable Comercial Inmobiliario | Cacique Desarrollos — BPE</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0C1B22;
+    --green: #6E3B93;
+    --aqua: #46C6AC;
+    --violet: #6E3B93;
+    --lilac: #AE8CD6;
+    --gray: #4A5A60;
+    --gray2: #6D7C82;
+    --silver: #C3C9CF;
+    --fog: #F5F7F6;
+    --white: #FFFFFF;
+    --border: #DDE3E1;
+    --border2: #E6EAE9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fog);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+  }
+
+  .logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 9px;
+    height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-badge {
+    font-size: 11px;
+    color: var(--gray2);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: var(--fog);
+    padding: 76px 0 68px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -140px;
+    top: -140px;
+    width: 340px;
+    height: 340px;
+    border: 1.5px solid rgba(70,198,172,0.22);
+    border-radius: 50%;
+  }
+
+  .hero-inner { position: relative; }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    color: var(--aqua);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--aqua);
+  }
+
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4.4vw, 42px);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 span { font-weight: 700; color: var(--aqua); }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .hero-meta span {
+    font-size: 13px;
+    color: rgba(245,247,246,0.72);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .hero-meta span + span::before {
+    content: '·';
+    margin-right: 3px;
+    color: rgba(245,247,246,0.35);
+  }
+
+  /* SECTION */
+  .section {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-label {
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .section h2 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: clamp(20px, 2.6vw, 24px);
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+
+  .section h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 24px 0 12px;
+  }
+
+  .section p {
+    color: var(--gray);
+    margin-bottom: 16px;
+    max-width: 700px;
+  }
+
+  .section a {
+    color: var(--green);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--lilac);
+  }
+
+  .section a:hover {
+    color: var(--violet);
+    border-bottom-color: var(--green);
+  }
+
+  .section strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .section ul, .section ol {
+    margin: 0 0 20px 20px;
+  }
+
+  .section li {
+    color: var(--gray);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--lilac);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    margin-bottom: 8px;
+    color: var(--gray);
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  .company-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .section .company-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 15px;
+    background: var(--fog);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+
+  .section .company-link:hover {
+    color: var(--green);
+    border-color: var(--lilac);
+    box-shadow: 0 4px 14px rgba(12,27,34,0.07);
+    transform: translateY(-1px);
+  }
+
+  .company-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--green);
+  }
+
+  /* INFO GRID (condiciones) */
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .info-row {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--green);
+    padding: 18px 24px;
+  }
+
+  .info-row .label {
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  .info-row .value {
+    color: var(--ink);
+    font-size: 15px;
+  }
+
+  /* APPLY */
+  .apply-card {
+    background: var(--white);
+    border: 1px dashed var(--silver);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .apply-card h2 {
+    margin-bottom: 24px;
+  }
+
+  .apply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green);
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 34px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  }
+
+  .section .apply-btn {
+    color: var(--white);
+    border-bottom: none;
+  }
+
+  .section .apply-btn:hover {
+    color: var(--white);
+    border-bottom: none;
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(110,59,147,0.24);
+  }
+
+  .apply-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray2);
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--ink);
+    padding: 24px 0;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(245,247,246,0.6);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 52px 0 44px; }
+    .section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        BPE
+      </div>
+      <div class="nav-badge mono">Búsquedas Para Empresas</div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow mono">Búsqueda activa</div>
+    <h1>Sumate como <span>Responsable Comercial Inmobiliario</span> en Cacique Desarrollos</h1>
+    <div class="hero-meta">
+      <span>Cacique Desarrollos</span>
+      <span>AMBA</span>
+      <span>Full-time</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="section">
+    <div class="section-label mono">Sobre la empresa</div>
+    <h2>Conocé a Cacique Desarrollos</h2>
+    <p><strong>Cacique Desarrollos</strong> es una desarrolladora inmobiliaria de Vicente López con más de 10 proyectos en desarrollo en la Ciudad de Buenos Aires. Busca sumar responsables comerciales a su equipo para asesorar a quienes consultan por sus unidades.</p>
+    <div class="callout">
+      <p>Si disfrutás vender, hacer seguimiento y trabajar por objetivos, ¡queremos conocerte!</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">El rol</div>
+    <h2>De la primera consulta al cierre de la venta</h2>
+    <p>Vas a gestionar las consultas que llegan a través de campañas publicitarias y a acompañar a potenciales clientes y asociados durante todo el proceso comercial. Las unidades tienen un <strong>ticket promedio de $100.000</strong>. Cada venta que cierres te permitirá sumar comisiones a tu ingreso fijo.</p>
+    <h3>¿Qué vas a hacer en el día a día?</h3>
+    <ul>
+      <li><strong>Contactar y calificar</strong> a quienes consultan para conocer sus necesidades e intereses.</li>
+      <li><strong>Dar seguimiento</strong> a cada oportunidad comercial con constancia.</li>
+      <li><strong>Organizar reuniones de asesoramiento</strong> y coordinar visitas a los proyectos.</li>
+      <li><strong>Presentar las propuestas inmobiliarias</strong> y responder consultas.</li>
+      <li><strong>Mantener al día a cada persona interesada</strong> sobre las novedades del proyecto.</li>
+      <li><strong>Trabajar con el equipo</strong> para hacer avanzar las oportunidades y concretar ventas.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">Perfil buscado</div>
+    <h2>¿Qué buscamos en vos?</h2>
+    <ul>
+      <li><strong>Experiencia en ventas, asesoramiento comercial o gestión de leads.</strong> Valoramos especialmente la experiencia en el sector inmobiliario.</li>
+      <li><strong>Escucha y comunicación clara</strong> para construir relaciones de confianza.</li>
+      <li><strong>Organización y disciplina</strong> para acompañar a varias personas a la vez y sostener el seguimiento de cada consulta.</li>
+      <li><strong>Iniciativa y orientación a resultados.</strong> Sabés organizar tu propio trabajo, tenés ganas de aprender y proponés ideas para vender más y mejor.</li>
+      <li><strong>Disponibilidad full-time</strong> para trabajar presencialmente en Villa Martelli durante el onboarding.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section-label mono">Condiciones y beneficios</div>
+    <h2>¿Qué te ofrece Cacique?</h2>
+    <div class="info-grid">
+      <div class="info-row">
+        <div class="label mono">Remuneración</div>
+        <div class="value"><strong>Base fija de USD 500</strong> más comisiones de <strong>hasta el 6 %</strong> por operación concretada.</div>
+      </div>
+      <div class="info-row">
+        <div class="label mono">Modalidad</div>
+        <div class="value">Jornada completa presencial en nuestra oficina en Villa Martelli, Vicente López. Durante tu onboarding, necesitamos que vengas presencial a la oficina pero luego tendrás la posibilidad de manejar tu tiempo y agenda para pasar a una modalidad híbrida en base a tu preferencia. Buscamos resultados y trabajo en equipo, no que calientes una silla "obligatoriamente".</div>
+      </div>
+      <div class="info-row">
+        <div class="label mono">Desarrollo comercial</div>
+        <div class="value">Vas a tener la posibilidad de comercializar desarrollos inmobiliarios de primer nivel y potenciar tu cartera de clientes como nunca. Realmente son pocas las empresas que te ofrecen este tipo de oportunidades en real estate.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="apply-card">
+      <h2>¿Sentís que esto es para vos?</h2>
+      <a href="apply.html?position=Responsable+Comercial+Inmobiliario" class="apply-btn">
+        Postulate
+        <svg aria-hidden="true" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="footer">
+  BPE · Búsquedas Para Empresas
+</footer>
+</body>
+</html>
